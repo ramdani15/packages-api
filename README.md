@@ -1,0 +1,37 @@
+<h1 align="center">Packages API</h1>
+
+## Tech Specs
+- **Docker** (`Docker Compose`)
+- **PHP 8** (`8.1`)
+- **Laravel 8** (`8.83`)
+- **MySQL** (`5.7`)
+- **Swagger** (`8.3`)
+
+## Requirements
+Before setup the project, you need to install this : 
+- **Docker Compose**
+
+## Installation Guide
+- Go to root project
+- Run `docker-compose up -d --build`
+- Every Laravel command Run after command `docker-compose exec app` (example : `composer install` to `docker-compose exec app composer install`)
+- Run `docker-compose exec app composer install`
+- Run `docker-compose exec app npm install`
+- Copy `env.example` to `.env` and fill with your database credentials (for `db` and `phpmyadmin` containers in `docker-compose-yml`)
+- Copy `src/.env.example` to `src/.env` and fill with your app / Laravel credentials
+- Copy `src/.env.example` to `src/.env.testing` for unit testing
+- Create database via `db` or `phpmyadmin` container
+- Run `docker-compose exec app php artisan migrate:refresh --seed`
+- Run `docker-compose exec app php artisan key:generate`
+- Run `docker-compose exec app php artisan storage:link`
+- For unit testing Run `docker-compose exec app php artisan test`
+
+## URL 
+- Web : `http://localhost:8080` (For change the port, update in `docker-compose.yml` file in `app` container)
+- MySQL : `http://localhost:3037` (For change the port, update in `docker-compose.yml` file in `db` container)
+- phpMyAdmin : `http://localhost:8082` (For change the port, update in `docker-compose.yml` file in `phpmyadmin` container)
+- After change the port you can run again `docker-compose up -d --build`
+
+## API Docs
+- API Docs URL : `/api/v1/documentation`
+- Generate / Regenerate Swagger docs : `docker-compose exec app php artisan l5-swagger:generate`
